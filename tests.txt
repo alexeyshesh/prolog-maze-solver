@@ -1,0 +1,36 @@
+### Тесты
+
+#### Поиск пути в лабиринте
+
+?- solve_maze(
+    [tr(1, 2), tr(in, 1), tr(in, 3), tr(2, 4), tr(1, 3), tr(4, 5), tr(5, out)],
+    Path
+).
+Path = [in, 3, 1, 2, 4, 5, out] ;
+Path = [in, 1, 2, 4, 5, out] ;
+false.
+
+?- solve_maze(
+    [tr(1, 2), tr(in, 1), tr(in, 3), tr(2, 4), tr(1, 3), tr(5, out)],
+    Path
+).
+false.
+
+#### Поиск проходов, которые нужно засыпать, чтобы лабиринт стал непроходимым
+
+?- destroy_maze([tr(in, 1), tr(in, 3), tr(2, 4), tr(1, 3), tr(4, 5), tr(5, out)], X, 1).
+X = [tr(in, 1)] ;
+X = [tr(in, 3)] ;
+X = [tr(2, 4)] ;
+X = [tr(1, 3)] ;
+X = [tr(4, 5)] ;
+false.
+
+?- destroy_maze([tr(1, 2), tr(in, 1), tr(in, 3), tr(2, 4), tr(1, 3), tr(4, 5), tr(5, out), tr(3, out)], X, 1).
+false.
+
+?- destroy_maze([tr(1, 2), tr(in, 1), tr(in, 3), tr(2, 4), tr(1, 3), tr(4, 5), tr(5, out), tr(3, out)], X, 2).
+X = [tr(1, 2), tr(3, out)] ;
+X = [tr(2, 4), tr(3, out)] ;
+X = [tr(4, 5), tr(3, out)] ;
+false.
